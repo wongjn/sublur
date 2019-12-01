@@ -5,7 +5,8 @@
   "description": "Bulk pixel-blur images",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . --ignore='\\.\\w'"
   },
   "repository": {
     "type": "git",
