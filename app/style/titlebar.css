@@ -1,0 +1,10 @@
+.window-title {
+  order: -10;
+  margin: 0 !important;
+  padding: 0 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.window-controls-container {
+  margin-left: auto !important;
+}

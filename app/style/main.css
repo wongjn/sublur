@@ -1,0 +1,59 @@
+body {
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+svg,
+img {
+  display: block;
+}
+
+button {
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  -webkit-appearance: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.5em;
+  background: #0004;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #fff9;
+}
+
+.actions {
+  position: sticky;
+  bottom: 0;
+  background-color: #263238;
+  padding: 0 1em;
+  text-align: right;
+}
+
+.actions > output {
+  margin: 1em;
+}
+
+.actions > button {
+  margin: 0.5em 1em;
+  border: 0;
+  background-color: #fff;
+  padding: 0.5em 1em;
+  color: #263238;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}

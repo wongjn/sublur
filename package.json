@@ -1,0 +1,31 @@
+{
+  "name": "sublur",
+  "productName": "sublur",
+  "version": "1.0.0",
+  "description": "Bulk pixel-blur images",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wongjn/sublur.git"
+  },
+  "author": "wongjn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wongjn/sublur/issues"
+  },
+  "homepage": "https://github.com/wongjn/sublur#readme",
+  "dependencies": {
+    "custom-electron-titlebar": "^3.1.0"
+  },
+  "devDependencies": {
+    "electron": "^7.1.2",
+    "electron-packager": "^14.1.1",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "typescript": "^3.7.2"
+  }
+}
