@@ -4,10 +4,6 @@
   "version": "1.0.0",
   "description": "Bulk pixel-blur images",
   "main": "index.js",
-  "scripts": {
-    "start": "electron .",
-    "build": "electron-packager ."
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wongjn/sublur.git"
@@ -18,15 +14,29 @@
     "url": "https://github.com/wongjn/sublur/issues"
   },
   "homepage": "https://github.com/wongjn/sublur#readme",
-  "dependencies": {
-    "custom-electron-titlebar": "^3.1.0"
+  "private": true,
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+    "lint": "prettier --check . && eslint .",
+    "format": "prettier --write ."
   },
   "devDependencies": {
-    "electron": "^7.1.2",
-    "electron-packager": "^14.1.1",
-    "eslint": "^6.7.2",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "typescript": "^3.7.2"
-  }
+    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/kit": "next",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "prettier": "^2.6.2",
+    "prettier-plugin-svelte": "^2.7.0",
+    "svelte": "^3.44.0",
+    "svelte-check": "^2.7.1",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.4"
+  },
+  "type": "module"
 }
