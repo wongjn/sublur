@@ -1,6 +1,7 @@
 {
   "name": "sublur",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "vite build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
