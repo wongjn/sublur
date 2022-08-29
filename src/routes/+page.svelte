@@ -1,5 +1,6 @@
 <script>
   import Image from '$lib/Image.svelte';
+  import { blur } from '$lib/images';
 
   /** @type {FileSystemDirectoryHandle} */
   let fileHandle;
@@ -12,12 +13,13 @@
     });
   };
 
-  let episode = typeof localStorage !== 'undefined'
-    ? parseInt(localStorage.getItem('episode') || '0', 10)
-    : 0;
+  let episode =
+    typeof localStorage !== 'undefined'
+      ? parseInt(localStorage.getItem('episode') || '0', 10)
+      : 0;
   let minute = 0;
 
-  /** @type {FileSystemFileHandle[]} */
+  /** @type {[FileSystemFileHandle, Promise<File>][]} */
   $: files = [];
   $: if (episode && minute) {
     const foundFiles = [];
@@ -25,25 +27,39 @@
     (async () => {
       for await (const handle of fileHandle.values()) {
         if (handle.name.includes(search) && !handle.name.endsWith('.mp3')) {
-          foundFiles.push(handle);
+          foundFiles.push([handle, handle.getFile()]);
         }
       }
       files = foundFiles;
       localStorage.setItem('episode', episode.toString());
     })();
   }
+
+  let saving = false;
+  $: save = async () => {
+    saving = true;
+    await Promise.allSettled(
+      files.map(async ([handle, file]) => {
+        const writable = await handle.createWritable();
+        await writable.write(await blur(await file));
+        await writable.close();
+      })
+    );
+    saving = false;
+    files = [];
+    minute = 0;
+  };
 </script>
 
 {#if !fileHandle}
-  <button on:click={getFileHandle}>
-    Open folder
-  </button>
+  <button on:click={getFileHandle}> Open folder </button>
 {:else}
   <input type="number" min="1" step="1" bind:value={episode} />
   <input type="number" min="1" step="1" bind:value={minute} />
-  {#each files as handle}
-    {#await handle.getFile() then file}
-      <Image {file}/>
+  {#each files as [ filePromise]}
+    {#await filePromise then file}
+      <Image {file} />
     {/await}
   {/each}
+  <button on:click={save} disabled={saving}>Save</button>
 {/if}
