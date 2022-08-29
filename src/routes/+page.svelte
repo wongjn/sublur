@@ -1,5 +1,6 @@
 <script>
   import { fly } from 'svelte/transition';
+  import { get, set } from 'idb-keyval';
   import Image from '$lib/Image.svelte';
   import { blur } from '$lib/images';
 
@@ -7,11 +8,24 @@
   let fileHandle;
 
   const getFileHandle = async () => {
+    const storedHandle = await get('filehandle');
+    if (storedHandle) {
+      const options = { mode: 'readwrite' };
+      if (
+        (await storedHandle.queryPermission(options)) === 'granted' ||
+        (await storedHandle.requestPermission(options)) === 'granted'
+      ) {
+        fileHandle = storedHandle;
+        return;
+      }
+    }
+
     fileHandle = await window.showDirectoryPicker({
       id: 'sublur',
       mode: 'readwrite',
       startIn: 'documents',
     });
+    await set('filehandle', fileHandle);
   };
 
   let episode =
