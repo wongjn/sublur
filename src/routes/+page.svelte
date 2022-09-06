@@ -32,11 +32,12 @@
     typeof localStorage !== 'undefined'
       ? parseInt(localStorage.getItem('episode') || '0', 10)
       : 0;
-  let minute = 0;
+  /** @type {number?} */
+  let minute = null;
 
   /** @type {[FileSystemFileHandle, Promise<File>][]} */
   $: files = [];
-  $: if (episode && minute) {
+  $: if (episode && minute !== null) {
     files = [];
     const foundFiles = [];
     const search = `${episode}_0.${minute.toString().padStart(2, '0')}`;
@@ -63,7 +64,7 @@
     );
     saving = false;
     files = [];
-    minute = 0;
+    minute = null;
   };
 </script>
 
